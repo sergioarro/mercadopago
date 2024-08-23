@@ -1,14 +1,2 @@
-BRANCH_NAME=$(git branch | grep '*' | sed 's/* //')
-VALID_BRANCH_REGEX="^(feature|hotfix|release)/(.*)+$"
-
-# Branch naming check
-if [ "$BRANCH_NAME" != "main" ] && [ "$BRANCH_NAME" != "develop" ]; then
-  if ! echo "$BRANCH_NAME" | grep -Eq "$VALID_BRANCH_REGEX"; then
-    echo "💥 Your branch name: '$BRANCH_NAME' is invalid, it has failed regex check"
-    echo "Ensure it"
-    echo "  - starts with one of: feature/, hotfix/, release/"
-    false
-  fi
-fi
-
-echo '✅ 🥳 Husky pre-push checks successful!'
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
