@@ -18,7 +18,8 @@ install: # Install all the dependencies
 build: # Build the NestJS project (ready for K8S environments)
 	npm run build
 
-dev: # Start the project in development mode
+dev: # Run the NestJS project in development mode
+	@echo "Starting development environment..."
 	npm run start:dev
 
 check: # Check the code style and linting

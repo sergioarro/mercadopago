@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { HealthStatusDto } from '../docs/health-response-success.doc';
+import { HealthStatusDto } from '../dtos/health-response-success.dto';
 import { HealthUseCase } from '@/application/use-cases/health.use-case';
 
 @Controller('health')
