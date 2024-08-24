@@ -32,7 +32,7 @@ test: # Run tests with coverage
 
 swagger: # Start the project and open Swagger documentation
 	npm run start:dev
-	open http://localhost:3000/api/docs
+	open http://localhost:3000/api
 
 clean: # Clean unnecessary directories
 	npm run clean

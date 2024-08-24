@@ -1,0 +1,14 @@
+{
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "[typescript]": {
+      "editor.formatOnSave": false
+    },
+    "prettier.requireConfig": true,
+  }
+  

@@ -1,6 +1,10 @@
-# mercadopago
+# mercadopago api backend NestJs
 
-Prueba técnica a Mercadopago
+## Requirements
+
+Before you begin, make sure you have the following installed on your system:
+
+- [Node.js 20](https://nodejs.org/) - For running the application in development mode.
 
 # Backend API
 
@@ -15,9 +19,17 @@ Prueba técnica a Mercadopago
 
 ## Comandos
 
+### Installing dependencies
+
+First, ensure Docker is installed on your system. Then, open your terminal and run the following command to install the necessary dependencies:
+
 ```bash
 $ make install
 ```
+
+## Running the Application
+
+To run the application in development mode (with watch and debug capabilities), use the following command:
 
 ```bash
 $ make dev
@@ -31,10 +43,6 @@ $ make lint
 $ make swagger
 ```
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
 ## Run tests
 
 ```bash
@@ -47,6 +55,25 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Swagger Documentation
+
+This project uses Swagger for API documentation. The Swagger documentation provides a detailed view of the API endpoints, request/response schemas, and other useful information.
+
+### Accessing Swagger UI
+
+After starting the application, you can access the Swagger UI at:
+
+```sh
+Open http://localhost:3000/api with your browser to see the result.
+```
+
+### Swagger JSON
+
+The Swagger JSON is generated automatically and can be found at:
+
+```sh
+http://localhost:3000/api-json
 
 ## Resources
 
@@ -73,3 +100,4 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```

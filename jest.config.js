@@ -1,3 +1,10 @@
+/**
+ * @typedef {import("ts-jest/dist/types").JestConfigWithTsJest} JestConfigWithTsJest
+ */
+
+/**
+ * @type {JestConfigWithTsJest}
+ */
 module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: {
@@ -26,9 +33,6 @@ module.exports = {
       lines: 100,
       statements: 100,
     },
-  },
-  moduleNameMapper: {
-    '@/(.*)': '<rootDir>/$1',
   },
   testEnvironment: 'node',
 };
