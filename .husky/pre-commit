@@ -1,0 +1,6 @@
+make check || {
+  echo '🤒 Linting failed. Make the required changes listed above, add changes and try to commit again.'
+  exit 1
+}
+
+echo '✅ 🥳 pre-commit checks successful.'
