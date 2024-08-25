@@ -9,12 +9,9 @@ import {
   Query,
   NotFoundException,
 } from '@nestjs/common';
-import {
-  ApiOkResponse,
-  ApiOperation,
-  ApiQuery,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { GetItemInput } from '@/presentation/rest/inputs/get-item-input.dto';
+import { SearchItemsInput } from '@/presentation/rest/inputs/search-items-input.dto';
 
 @Controller('items')
 @ApiTags('Items')
@@ -30,11 +27,11 @@ export class ItemController {
     description: 'The item details are successfully retrieved.',
     type: ItemResponseDto,
   })
-  async getItem(@Param('id') id: string): Promise<ItemResponseDto> {
-    const itemDto = await this.getItemUseCase.execute(id);
+  async getItem(@Param() params: GetItemInput): Promise<ItemResponseDto> {
+    const itemDto = await this.getItemUseCase.execute(params.id);
 
     if (!itemDto) {
-      throw new NotFoundException(`Item with ID ${id} not found`);
+      throw new NotFoundException(`Item with ID ${params.id} not found`);
     }
 
     return itemDto;
@@ -46,17 +43,9 @@ export class ItemController {
     description: 'The search results are successfully retrieved.',
     type: SearchResponseDto,
   })
-  @ApiQuery({
-    name: 'limit',
-    required: false,
-    type: Number,
-    description: 'Limit the number of items returned. Defaults to 4.',
-    example: 4,
-  })
   async searchItems(
-    @Query('q') query: string,
-    @Query('limit') limit = 4,
+    @Query() query: SearchItemsInput,
   ): Promise<SearchResponseDto> {
-    return this.searchItemsUseCase.execute(query, limit);
+    return this.searchItemsUseCase.execute(query.q, query.limit || 4);
   }
 }
