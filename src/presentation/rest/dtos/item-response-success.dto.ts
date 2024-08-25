@@ -18,7 +18,7 @@ export class PriceDto {
 }
 
 export class ItemResponseDto {
-  @ApiProperty({ example: 'MLA123456' })
+  @ApiProperty({ example: 'MLA1809751984' })
   id: string;
 
   @ApiProperty({ example: 'Example Item' })

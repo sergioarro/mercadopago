@@ -19,9 +19,12 @@ export class SearchItemsUseCase {
       `Executing SearchItemsUseCase with query: ${query} and limit: ${limit}`,
     );
     try {
-      const response = await this.itemService.searchItems(query, limit);
-      this.logger.debug(`Search results: ${JSON.stringify(response)}`);
-      return this.searchResponseMapper.toDto(response);
+      const { items, categories } = await this.itemService.searchItems(
+        query,
+        limit,
+      );
+      this.logger.debug(`Search results: ${JSON.stringify(items)}`);
+      return this.searchResponseMapper.toDto(items, categories);
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.logger.error(

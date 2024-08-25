@@ -1,10 +1,22 @@
 export interface MeliSearchResponse {
   results: MeliItem[];
+  available_filters: MeliCategoryFilter[];
   filters: Array<{
     id: string;
     values: Array<{
       name: string;
     }>;
+  }>;
+}
+
+export interface MeliCategoryFilter {
+  id: string;
+  name: string;
+  type: string;
+  values: Array<{
+    id: string;
+    name: string;
+    results: number;
   }>;
 }
 

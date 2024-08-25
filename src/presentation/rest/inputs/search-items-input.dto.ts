@@ -5,7 +5,7 @@ import { Type } from 'class-transformer';
 export class SearchItemsInput {
   @ApiProperty({
     description: 'Query string to search items',
-    example: 'laptop',
+    example: 'Samsung%20Galaxy',
   })
   @IsString()
   q: string;

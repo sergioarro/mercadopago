@@ -14,7 +14,10 @@ export class ItemDomainService {
     return this.ItemService.getItemById(id);
   }
 
-  async searchItems(query: string, limit: number): Promise<Item[]> {
+  async searchItems(
+    query: string,
+    limit: number,
+  ): Promise<{ items: Item[]; categories: string[] }> {
     return this.ItemService.searchItems(query, limit);
   }
 }

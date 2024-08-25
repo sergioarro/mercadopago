@@ -1,8 +1,8 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ITEM_REPOSITORY } from '@/shared/constants';
-import { ItemResponseDto } from '@/presentation/rest/dtos/item-response-success.dto';
 import { ItemResponseMapper } from '@/application/mappers/item.mapper';
 import { ItemService } from '@/domain/interfaces/item.service.interface';
+import { GetItemResponseDto } from '@/presentation/rest/dtos/get-item-response.dto';
 
 @Injectable()
 export class GetItemUseCase {
@@ -14,7 +14,7 @@ export class GetItemUseCase {
     private readonly itemResponseMapper: ItemResponseMapper,
   ) {}
 
-  async execute(id: string): Promise<ItemResponseDto | null> {
+  async execute(id: string): Promise<GetItemResponseDto | null> {
     this.logger.log(`Executing GetItemUseCase with ID: ${id}`);
     try {
       const item = await this.ItemService.getItemById(id);

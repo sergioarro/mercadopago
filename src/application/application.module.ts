@@ -5,6 +5,8 @@ import { GetItemUseCase } from '@/application/use-cases/get-item.use-case';
 import { ItemResponseMapper } from '@/application/mappers/item.mapper';
 import { SearchItemsUseCase } from '@/application/use-cases/search-items.use-case';
 import { SearchResponseMapper } from '@/application/mappers/search-response.mapper';
+import authorConfig from '@/application/config/author.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   exports: [HealthUseCase, GetItemUseCase, SearchItemsUseCase],
@@ -15,6 +17,6 @@ import { SearchResponseMapper } from '@/application/mappers/search-response.mapp
     SearchItemsUseCase,
     SearchResponseMapper,
   ],
-  imports: [DomainModule],
+  imports: [DomainModule, ConfigModule.forFeature(authorConfig)],
 })
 export class ApplicationModule {}

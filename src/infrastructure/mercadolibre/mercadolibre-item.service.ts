@@ -8,6 +8,7 @@ import {
   MeliSearchResponse,
   MeliItemResponse,
   MeliItemDescriptionResponse,
+  MeliCategoryFilter,
 } from './mercadolibre-item.types';
 import { ItemMapper } from '@/infrastructure/mercadolibre/mappers/item.mapper';
 import { ItemService } from '@/domain/interfaces/item.service.interface';
@@ -25,8 +26,12 @@ export class MercadoLibreItemService implements ItemService {
     this.API_BASE_URL = this.configService.getOrThrow<string>('API_URL_MELI');
   }
 
-  async searchItems(query: string, limit: number): Promise<Item[]> {
-    const url = `${this.API_BASE_URL}/sites/MLA/search?q=${query}&limit=${limit}`;
+  async searchItems(
+    query: string,
+    limit: number,
+  ): Promise<{ items: Item[]; categories: string[] }> {
+    const url = `${this.API_BASE_URL}/sites/MLA/search?q=${encodeURIComponent(query)}&limit=${limit}`;
+
     this.logger.debug(
       `Requesting search items with query: ${query} and limit: ${limit}`,
     );
@@ -38,9 +43,24 @@ export class MercadoLibreItemService implements ItemService {
       this.logger.debug(
         `Received search results: ${JSON.stringify(response.data)}`,
       );
-      return response.data.results.map((itemData) =>
+
+      const items = response.data.results.map((itemData) =>
         this.itemMapper.toDomain(itemData),
       );
+
+      const categoryFilter = response.data.available_filters?.find(
+        (filter: MeliCategoryFilter) => filter.id === 'category',
+      );
+
+      this.logger.debug(
+        `Category Filter Found: ${JSON.stringify(categoryFilter)}`,
+      );
+
+      const categories = categoryFilter
+        ? categoryFilter.values.map((value) => value.name)
+        : [];
+
+      return { items, categories };
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.logger.error(

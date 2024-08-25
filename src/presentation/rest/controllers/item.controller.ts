@@ -1,6 +1,5 @@
 import { GetItemUseCase } from '@/application/use-cases/get-item.use-case';
 import { SearchItemsUseCase } from '@/application/use-cases/search-items.use-case';
-import { ItemResponseDto } from '@/presentation/rest/dtos/item-response-success.dto';
 import { SearchResponseDto } from '@/presentation/rest/dtos/search-response-success.dto';
 import {
   Controller,
@@ -12,6 +11,7 @@ import {
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetItemInput } from '@/presentation/rest/inputs/get-item-input.dto';
 import { SearchItemsInput } from '@/presentation/rest/inputs/search-items-input.dto';
+import { GetItemResponseDto } from '@/presentation/rest/dtos/get-item-response.dto';
 
 @Controller('items')
 @ApiTags('Items')
@@ -25,9 +25,9 @@ export class ItemController {
   @ApiOperation({ summary: 'Get item details by ID' })
   @ApiOkResponse({
     description: 'The item details are successfully retrieved.',
-    type: ItemResponseDto,
+    type: GetItemResponseDto,
   })
-  async getItem(@Param() params: GetItemInput): Promise<ItemResponseDto> {
+  async getItem(@Param() params: GetItemInput): Promise<GetItemResponseDto> {
     const itemDto = await this.getItemUseCase.execute(params.id);
 
     if (!itemDto) {

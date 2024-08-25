@@ -1,59 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ItemResponseDto } from './item-response-success.dto';
+import { AuthorDto } from './author.dto';
 
-class PriceDto {
-  @ApiProperty({ example: 'CLP' })
-  currency: string;
+export class SearchResponseDto {
+  @ApiProperty({ type: AuthorDto })
+  author: AuthorDto;
 
-  @ApiProperty({ example: 100 })
-  amount: number;
-
-  @ApiProperty({ example: 99 })
-  decimals: number;
-
-  constructor(currency: string, amount: number, decimals: number) {
-    this.currency = currency;
-    this.amount = amount;
-    this.decimals = decimals;
-  }
-}
-
-class ItemResponseDto {
-  @ApiProperty({ example: 'MLA123456' })
-  id: string;
-
-  @ApiProperty({ example: 'Example Item' })
-  title: string;
-
-  @ApiProperty({ type: PriceDto })
-  price: PriceDto;
-
-  @ApiProperty({ example: 'https://example.com/image.jpg' })
-  picture: string;
-
-  @ApiProperty({ example: 'new' })
-  condition: string;
-
-  @ApiProperty({ example: true })
-  freeShipping: boolean;
-
-  constructor(
-    id: string,
-    title: string,
-    price: PriceDto,
-    picture: string,
-    condition: string,
-    freeShipping: boolean,
-  ) {
-    this.id = id;
-    this.title = title;
-    this.price = price;
-    this.picture = picture;
-    this.condition = condition;
-    this.freeShipping = freeShipping;
-  }
-}
-
-class SearchResponseDto {
   @ApiProperty({
     example: ['category1', 'category2', 'category3'],
   })
@@ -62,15 +14,13 @@ class SearchResponseDto {
   @ApiProperty({ type: [ItemResponseDto] })
   items: ItemResponseDto[];
 
-  constructor(categories: string[], items: ItemResponseDto[]) {
+  constructor(
+    author: AuthorDto,
+    categories: string[],
+    items: ItemResponseDto[],
+  ) {
+    this.author = author;
     this.categories = categories;
     this.items = items;
   }
 }
-
-// prettier-ignore
-export { 
-  PriceDto, 
-  ItemResponseDto, 
-  SearchResponseDto 
-};
