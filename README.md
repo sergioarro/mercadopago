@@ -5,8 +5,6 @@
 Before you begin, make sure you have the following installed on your system:
 
 - [Node.js 22](https://nodejs.org/) - For running the application in development mode.
-- [Docker Engine](https://docs.docker.com/engine/) - For containerization.
-- [Docker Compose](https://docs.docker.com/compose/) - For running multi-container Docker applications.
 
 # Backend API
 
@@ -17,7 +15,7 @@ Before you begin, make sure you have the following installed on your system:
 
 ## Swagger
 
-- Swagger disponible en: `http://localhost:3000/api/docs`
+- Swagger disponible en: `http://localhost:3000/api`
 
 ## Comandos
 

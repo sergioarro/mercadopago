@@ -24,6 +24,10 @@ module.exports = {
     '.mock.ts$',
     '.spec.ts$',
     'src/main.ts',
+    '.dto.ts',
+    '.entity.ts',
+    '.interface.ts',
+    '.constants.ts',
   ],
   coverageReporters: ['html', 'json', 'text'],
   coverageThreshold: {
