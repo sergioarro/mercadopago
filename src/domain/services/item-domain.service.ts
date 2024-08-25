@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ItemService } from '../interfaces/item.repository';
 import { Item } from '../entities/item.entity';
 import { ITEM_REPOSITORY } from '@/shared/constants';
+import { ItemService } from '@/domain/interfaces/item.service.interface';
 
 @Injectable()
 export class ItemDomainService {
@@ -14,7 +14,7 @@ export class ItemDomainService {
     return this.ItemService.getItemById(id);
   }
 
-  async searchItems(query: string): Promise<Item[]> {
-    return this.ItemService.searchItems(query);
+  async searchItems(query: string, limit: number): Promise<Item[]> {
+    return this.ItemService.searchItems(query, limit);
   }
 }

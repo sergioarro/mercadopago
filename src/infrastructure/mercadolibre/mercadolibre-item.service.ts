@@ -10,7 +10,7 @@ import {
   MeliItemDescriptionResponse,
 } from './mercadolibre-item.types';
 import { ItemMapper } from '@/infrastructure/mercadolibre/mappers/item.mapper';
-import { ItemService } from '@/domain/interfaces/item.repository';
+import { ItemService } from '@/domain/interfaces/item.service.interface';
 
 @Injectable()
 export class MercadoLibreItemService implements ItemService {
@@ -25,18 +25,22 @@ export class MercadoLibreItemService implements ItemService {
     this.API_BASE_URL = this.configService.getOrThrow<string>('API_URL_MELI');
   }
 
-  async searchItems(query: string): Promise<Item[]> {
-    const url = `${this.API_BASE_URL}/sites/MLA/search?q=${query}`;
-    this.logger.debug(`Requesting search items with query: ${query}`);
+  async searchItems(query: string, limit: number): Promise<Item[]> {
+    const url = `${this.API_BASE_URL}/sites/MLA/search?q=${query}&limit=${limit}`;
+    this.logger.debug(
+      `Requesting search items with query: ${query} and limit: ${limit}`,
+    );
 
     try {
       const response = await firstValueFrom(
         this.httpService.get<MeliSearchResponse>(url),
       );
-      const items = response.data.results.slice(0, 4);
-
-      this.logger.debug(`Received items: ${JSON.stringify(items)}`);
-      return items.map((itemData) => this.itemMapper.toDomain(itemData));
+      this.logger.debug(
+        `Received search results: ${JSON.stringify(response.data)}`,
+      );
+      return response.data.results.map((itemData) =>
+        this.itemMapper.toDomain(itemData),
+      );
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.logger.error(

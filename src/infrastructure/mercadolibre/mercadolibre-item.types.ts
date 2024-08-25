@@ -1,5 +1,11 @@
 export interface MeliSearchResponse {
   results: MeliItem[];
+  filters: Array<{
+    id: string;
+    values: Array<{
+      name: string;
+    }>;
+  }>;
 }
 
 export interface MeliItem {

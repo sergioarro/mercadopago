@@ -1,8 +1,8 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { ItemService } from '../../domain/interfaces/item.repository';
 import { ITEM_REPOSITORY } from '@/shared/constants';
 import { ItemResponseDto } from '@/presentation/rest/dtos/item-response-success.dto';
 import { ItemResponseMapper } from '@/application/mappers/item.mapper';
+import { ItemService } from '@/domain/interfaces/item.service.interface';
 
 @Injectable()
 export class GetItemUseCase {
