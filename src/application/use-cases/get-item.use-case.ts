@@ -29,8 +29,6 @@ export class GetItemUseCase {
           `Error in GetItemUseCase: ${error.message}`,
           error.stack,
         );
-      } else {
-        this.logger.error(`Unknown error in GetItemUseCase: ${String(error)}`);
       }
       throw error;
     }

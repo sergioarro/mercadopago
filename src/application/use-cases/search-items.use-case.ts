@@ -31,10 +31,6 @@ export class SearchItemsUseCase {
           `Error in SearchItemsUseCase: ${error.message}`,
           error.stack,
         );
-      } else {
-        this.logger.error(
-          `Unknown error in SearchItemsUseCase: ${String(error)}`,
-        );
       }
       throw error;
     }

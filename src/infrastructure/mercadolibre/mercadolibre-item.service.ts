@@ -40,6 +40,11 @@ export class MercadoLibreItemService implements ItemService {
       const response = await firstValueFrom(
         this.httpService.get<MeliSearchResponse>(url),
       );
+
+      if (!response.data || !response.data.results) {
+        throw new Error('No results found in the response');
+      }
+
       this.logger.debug(
         `Received search results: ${JSON.stringify(response.data)}`,
       );
@@ -67,8 +72,6 @@ export class MercadoLibreItemService implements ItemService {
           `Failed to fetch search items: ${error.message}`,
           error.stack,
         );
-      } else {
-        this.logger.error(`Failed to fetch search items: ${String(error)}`);
       }
       throw error;
     }
@@ -103,10 +106,6 @@ export class MercadoLibreItemService implements ItemService {
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.logger.error(`Failed to fetch item by ID: ${id}`, error.stack);
-      } else {
-        this.logger.error(
-          `Failed to fetch item by ID: ${id}, unknown error: ${String(error)}`,
-        );
       }
       throw error;
     }

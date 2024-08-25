@@ -30,6 +30,7 @@ export interface MeliItem {
   shipping: {
     free_shipping: boolean;
   };
+  sold_quantity: number;
 }
 
 export interface MeliItemResponse {
