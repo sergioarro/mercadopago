@@ -33,9 +33,25 @@ test: # Run tests with coverage
 
 swagger: # Start the project and open Swagger documentation
 	npm run start:dev
-	open http://localhost:3000/api
+	open http://localhost:3001/api
 
 clean: # Clean unnecessary directories
 	npm run clean
 
-.PHONY: test
+docker:
+	@echo Building docker image for ${PROJECT_NAME} v${LAST_VERSION}
+
+ifeq ($(DEBUG),true)
+	@echo "Debug mode is on."
+	docker build --target final -t ${PROJECT_NAME} -f ./docker/Dockerfile . --no-cache --progress=plain
+else
+	docker build --platform=linux/amd64 --target final -t ${PROJECT_NAME} -f ./docker/Dockerfile .
+endif
+
+run: docker #docker run --env NODE_ENV=production --env-file .env -p 3000:8080 ${PROJECT_NAME}
+	docker run -p 8080:3000 ${PROJECT_NAME}
+
+run-interact: # Run the docker image prebuilded
+	docker run -it -p 8080:3000 ${PROJECT_NAME}
+
+.PHONY: clean docker run build test install

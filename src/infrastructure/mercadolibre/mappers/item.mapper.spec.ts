@@ -11,7 +11,7 @@ describe('ItemMapper', () => {
 
   it('should map MeliItem to Item correctly', () => {
     const meliItem: MeliItem = {
-      id: 'MLA123456',
+      id: 'MLA1809751984',
       title: 'Test Item',
       price: 1500.75,
       currency_id: 'ARS',
@@ -24,7 +24,7 @@ describe('ItemMapper', () => {
     };
 
     const expectedItem: Item = new Item(
-      'MLA123456',
+      'MLA1809751984',
       'Test Item',
       {
         currency: 'ARS',

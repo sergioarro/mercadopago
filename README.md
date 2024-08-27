@@ -5,6 +5,7 @@
 Before you begin, make sure you have the following installed on your system:
 
 - [Node.js 22](https://nodejs.org/) - For running the application in development mode.
+- [Docker Engine](https://docs.docker.com/engine/) - For containerization.
 
 # Backend API
 
